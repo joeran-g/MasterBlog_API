@@ -35,6 +35,7 @@ function loadPosts() {
     .catch(error => console.error('Error:', error));
 }
 
+
 // Function to send a POST request to the API to add a new post
 function addPost() {
     const baseUrl = document.getElementById('api-base-url').value;
@@ -42,30 +43,32 @@ function addPost() {
     const contentInput = document.getElementById('post-content');
     const authorInput = document.getElementById('post-author');
 
+    // Construct the post object
+    const postData = {
+        title: titleInput.value,
+        content: contentInput.value,
+        author: authorInput.value
+    };
+
     fetch(baseUrl + '/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            title: titleInput.value,
-            content: contentInput.value,
-            author: authorInput.value
-        })
+        body: JSON.stringify(postData)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to add post");
-        }
+        if (!response.ok) throw new Error('Failed to add post');
 
-        // ✅ Clear inputs
+        // ✅ Clear input fields AFTER successful add
         titleInput.value = '';
         contentInput.value = '';
         authorInput.value = '';
 
-        // ✅ Reload posts only
+        // ✅ Reload posts
         loadPosts();
     })
     .catch(error => console.error('Error:', error));
 }
+
 
 // Function to send a DELETE request to the API to delete a post
 function deletePost(postId) {
