@@ -1,65 +1,19 @@
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 20px 0;
-    height: 100vh;
-}
-
-.container {
-    background-color: #fff;
-    width: 80%;
+/* Posts container */
+#post-container {
+    margin-top: 20px;
     padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    margin: auto;
+    background-color: #fafafa;
 }
 
-.input-field {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.input-field input,
-.input-field button {
-    height: 40px;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.5s ease;
-}
-
-.input-field input {
-    flex-grow: 1;
-    margin-right: 10px;
-}
-
-.input-field input::placeholder {
-    color: #aaa;
-}
-
-.input-field button {
-    background-color: #4466ee;
-    color: #fff;
-    cursor: pointer;
-}
-
-.input-field button:hover {
-    background-color: #3355dd;
-}
-
+/* Individual posts */
 .post {
     border-radius: 8px;
-    background-color: #f5f5f5;
-    margin-bottom: 20px;
-    padding: 20px;
+    background-color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
 }
 
@@ -74,9 +28,10 @@ body {
     color: #333;
 }
 
+/* Post buttons */
 .post button {
     position: absolute;
-    top: 10px;
+    bottom: 10px; /* bottom-right button */
     right: 10px;
     background-color: #ff4444;
     color: #fff;
@@ -89,3 +44,63 @@ body {
 .post button:hover {
     background-color: #cc0000;
 }
+
+/* Input fields */
+.input-field {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-field input,
+.input-field textarea {
+    flex: 1;
+    height: 42px;
+    padding: 10px 14px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.input-field input::placeholder,
+.input-field textarea::placeholder {
+    color: #aaa;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    outline: none;
+    border-color: #4466ee;
+    box-shadow: 0 0 0 3px rgba(68,102,238,0.15);
+    background-color: #fff;
+}
+
+/* Buttons */
+.input-field button {
+    height: 42px;
+    padding: 0 18px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4466ee;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(68, 102, 238, 0.25);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.input-field button:hover {
+    background-color: #3355dd;
+}
+
+.input-field button:active {
+    transform: translateY(1px);
+}
+

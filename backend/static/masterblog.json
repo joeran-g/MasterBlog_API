@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Masterblog API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5001",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Post",
+      "description": "Post API - CRUD"
+    }
+  ],
+  "paths": {
+    "/api/posts": {
+      "get": {
+        "tags": ["Post"],
+        "summary": "Returns all posts",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Sort by field (id, title, content, author, date)"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Sort direction (asc or desc)"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successful operation" },
+          "400": { "description": "Wrong parameters" }
+        }
+      },
+      "post": {
+        "tags": ["Post"],
+        "summary": "Create a new post",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "post",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["title", "content", "author"],
+              "properties": {
+                "title": { "type": "string" },
+                "content": { "type": "string" },
+                "author": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Post created" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+
+    "/api/posts/{post_id}": {
+      "delete": {
+        "tags": ["Post"],
+        "summary": "Delete a post by ID",
+        "parameters": [
+          {
+            "name": "post_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Post deleted" },
+          "404": { "description": "Post not found" }
+        }
+      },
+      "put": {
+        "tags": ["Post"],
+        "summary": "Update a post by ID",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "post_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "post",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "content": { "type": "string" },
+                "author": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Post updated" },
+          "404": { "description": "Post not found" }
+        }
+      }
+    },
+
+    "/api/posts/search": {
+      "get": {
+        "tags": ["Post"],
+        "summary": "Search posts by fields",
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "title", "in": "query", "type": "string" },
+          { "name": "content", "in": "query", "type": "string" },
+          { "name": "author", "in": "query", "type": "string" },
+          { "name": "date", "in": "query", "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Search results" }
+        }
+      }
+    }
+  }
+}
+
+
